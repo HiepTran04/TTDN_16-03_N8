@@ -90,28 +90,34 @@ API_KEY = "API Key của bạn"
 
 ## 📸 Hình ảnh Minh họa
 ### 1. Giao diện Quản lý Nhân sự
-<p align="center">
-  <img src="picture/ho_so_nhan_su.png" width="500">
-</p>
-<p align="center">
-  <img src="picture/ho_so_nhan_su2.png" width="500">
-</p>
+<div align="center">
+  <img src="picture/ho_so_nhan_su" width="500">
+  <p>Danh sách nhân sự</p>
+</div>
+<div align="center">
+  <img src="picture/ho_so_nhan_su2" width="500">
+  <p>Thông tin nhân sự</p>
+</div>
 
 ### 2. Giao diện Quản lý Dự án
-<p align="center">
-  <img src="picture/du_an.png" width="500">
-</p>
-<p align="center">
-  <img src="picture/thong_tin_du_an.png" width="500">
-</p>
+<div align="center">
+  <img src="picture/du_an" width="500">
+  <p>Danh sách dự án</p>
+</div>
+<div align="center">
+  <img src="picture/thong_tin_du_an" width="500">
+  <p>Thông tin dự án</p>
+</div>
 
 ### 3. Giao diện Quản lý Công việc
-<p align="center">
-  <img src="picture/cong_viec.png" width="500">
-</p>
-<p align="center">
-  <img src="picture/thong_tin_cong_viec.png" width="500">
-</p>
+<div align="center">
+  <img src="picture/cong_viec" width="500">
+  <p>Danh sách các công việc trong dự án</p>
+</div>
+<div align="center">
+  <img src="picture/thong_tin_cong_viec" width="500">
+  <p>Thông tin công việc</p>
+</div>
 
 ### 4. Dashboard Phân tích Dự án
 
