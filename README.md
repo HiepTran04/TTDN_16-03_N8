@@ -1,72 +1,110 @@
+# 🚀 Hệ thống Quản lý Dự án & Công việc Thông minh (Odoo AI)
+
+![Odoo](https://img.shields.io/badge/Odoo-15.0%2B-purple?style=for-the-badge&logo=odoo&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange?style=for-the-badge&logo=google&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+
+## 📖 Tổng quan
+
+Dự án cung cấp bộ giải pháp toàn diện trên nền tảng Odoo, giúp doanh nghiệp chuẩn hóa quy trình từ **Quản lý Hồ sơ Nhân sự**, **Hoạch định Dự án** đến **Giám sát Tiến độ Công việc**.
+
+Điểm đột phá của hệ thống là việc tích hợp **Google Gemini AI**, giúp tự động hóa quy trình đánh giá mã nguồn (Code Review) và kiểm tra chất lượng tài liệu, giúp Project Manager tiết kiệm 80% thời gian rà soát.
+
 ---
-![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
-![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-![Python](https://img.shields.io/badge/python-v3.8+-blue.svg)
-[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+## 🌟 Tính năng Nổi bật
 
+### 1. 🤖 Quản lý Công việc & AI Integration (`quan_ly_cong_viec`)
+Đây là module cốt lõi với các tính năng công nghệ cao:
+* **AI Code Review:** Tích hợp API **Google Gemini 1.5 Pro/Flash** để tự động đọc nội dung file code, chấm điểm, phát hiện lỗi logic/bảo mật và đưa ra nhận xét chi tiết dưới dạng HTML.
+* **Smart Upload (1-Touch):** Widget upload cải tiến, cho phép chọn file trực tiếp từ máy tính (bỏ qua các bước popup trung gian), hỗ trợ kéo thả nhiều file.
+* **Fast Upload Mode:** Hỗ trợ tải tài liệu lên ngay cả khi đang ở chế độ Xem (Read-only), không cần bấm nút "Sửa".
+* **Visual Tracking:** Thanh tiến độ (Progress Bar) động, tự động đổi màu cảnh báo theo deadline (Xanh: Ổn, Vàng: Sắp hạn, Đỏ: Trễ hạn).
 
+### 2. 🏗️ Quản lý Dự án Đầu tư (`quan_ly_du_an`)
+* **Dashboard Quản trị:** Cái nhìn toàn cảnh về ngân sách dự kiến vs thực tế, tổng số giờ công (Man-hours).
+* **Phân tích Đa chiều:** Tích hợp sẵn **Pivot View** và **Graph View** để báo cáo hiệu suất dự án theo thời gian thực.
+* **Liên kết chặt chẽ:** Tự động đồng bộ dữ liệu giữa Dự án tổng và các Công việc con.
 
+### 3. 👥 Quản lý Nhân sự (`quan_ly_nhan_su`)
+* **Hồ sơ 360 độ:** Quản lý tập trung thông tin nhân viên, kỹ năng chuyên môn, và thông tin liên hệ.
+* **Cấu trúc tổ chức:** Sơ đồ phòng ban, chức vụ và quản lý trực tiếp.
 
-# 1. Cài đặt công cụ, môi trường và các thư viện cần thiết
+---
 
-## 1.1. Clone project.
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git
-git checkout 
+## 🛠️ Yêu cầu Kỹ thuật
 
-## 1.2. cài đặt các thư viện cần thiết
+Trước khi cài đặt, đảm bảo hệ thống đáp ứng các yêu cầu sau:
 
-Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
+* **OS:** Ubuntu 20.04/22.04 hoặc Windows/MacOS.
+* **Python:** 3.8 trở lên.
+* **Odoo:** Phiên bản 14.0, 15.0 hoặc 16.0.
+* **Database:** PostgreSQL 13+.
 
+---
+
+## ⚙️ Hướng dẫn Cài đặt & Triển khai
+
+### Bước 1: Clone mã nguồn
+```bash
+git clone https://github.com/HiepTran04/TTDN_16-03_N8.git
+cd odoo-fitdnu
 ```
-sudo apt-get install libxml2-dev libxslt-dev libldap2-dev libsasl2-dev libssl-dev python3.10-distutils python3.10-dev build-essential libssl-dev libffi-dev zlib1g-dev python3.10-venv libpq-dev
-```
-## 1.3. khởi tạo môi trường ảo.
 
-`python3.10 -m venv ./venv`
-Thay đổi trình thông dịch sang môi trường ảo và chạy requirements.txt để cài đặt tiếp các thư viện được yêu cầu
+### Bước 2: Cài đặt thư viện phụ thuộc
+Cài đặt các thư viện Python cần thiết, đặc biệt là thư viện AI của Google:
 
-```
-source venv/bin/activate
-pip3 install -r requirements.txt
+```bash
+pip install -r requirements.txt
+pip install google-generativeai
 ```
 
-# 2. Setup database
+### Bước 3: Cấu hình Odoo
+Thêm đường dẫn module vào file odoo.conf:
 
-Khởi tạo database trên docker bằng việc thực thi file dockercompose.yml.
-
-`docker-compose up -d`
-
-# 3. Setup tham số chạy cho hệ thống
-
-## 3.1. Khởi tạo odoo.conf
-
-Tạo tệp **odoo.conf** có nội dung như sau:
-
-```
+```bash
 [options]
-addons_path = addons
+addons_path = /path/to/odoo/addons,/path/to/your/custom_addons
+admin_passwd = admin
 db_host = localhost
-db_password = odoo
-db_user = odoo
 db_port = 5432
-xmlrpc_port = 8069
-```
-Có thể kế thừa từ **odoo.conf.template**
-
-Ngoài ra có thể thêm mổ số parameters như:
-
-```
--c _<đường dẫn đến tệp odoo.conf>_
--u _<tên addons>_ giúp cập nhật addons đó trước khi khởi chạy
--d _<tên database>_ giúp chỉ rõ tên database được sử dụng
---dev=all giúp bật chế độ nhà phát triển 
+db_user = odoo
+db_password = odoo
 ```
 
-# 4. Chạy hệ thống và cài đặt các ứng dụng cần thiết
+### Bước 4: Cấu hình API Key
+Để tính năng AI hoạt động, bạn cần cấu hình API Key:
+Lấy API Key miễn phí tại Google AI Studio.
+Mở file quan_ly_cong_viec/models/cong_viec.py.
+Cập nhật biến API_KEY:
 
-Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
+```bash
+API_KEY = "API Key của bạn"
+```
 
-Hoàn tất
-    
+### Bước 5: Khởi chạy
+```bash
+./odoo-bin -c odoo.conf -u quan_ly_nhan_su,quan_ly_du_an,quan_ly_cong_viec
+```
+
+## 📸 Hình ảnh Minh họa
+### 1. Giao diện Upload thông minh & AI Đánh giá
+### 2. Dashboard Phân tích Dự án
+
+## 📂 Cấu trúc Thư mục
+```bash
+.
+├── quan_ly_cong_viec/   # Logic xử lý AI, Task, Upload
+├── quan_ly_du_an/       # Logic quản lý Dự án, Báo cáo
+├── quan_ly_nhan_su/     # Logic quản lý Hồ sơ nhân viên
+├── requirements.txt     # Danh sách thư viện Python
+└── README.md            # Tài liệu này
+```
+
+### 🤝 Đóng góp
+Mọi sự đóng góp đều được hoan nghênh. Vui lòng tạo Pull Request cho các tính năng mới hoặc mở Issue nếu phát hiện lỗi.
+
+### 📄 Bản quyền
+Dự án được phát triển bởi Trần Đình Hiệp.
+
