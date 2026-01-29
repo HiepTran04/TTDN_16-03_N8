@@ -1,4 +1,4 @@
-# 🚀 Hệ thống Quản lý Dự án & Công việc Thông minh (Odoo AI)
+# 🚀 Hệ thống Quản lý Dự án và Quản lý Công việc
 
 ![Odoo](https://img.shields.io/badge/Odoo-15.0%2B-purple?style=for-the-badge&logo=odoo&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
@@ -17,7 +17,7 @@ Dự án cung cấp bộ giải pháp toàn diện trên nền tảng Odoo, giú
 
 ### 1. 🤖 Quản lý Công việc & AI Integration (`quan_ly_cong_viec`)
 Đây là module cốt lõi với các tính năng công nghệ cao:
-* **AI Code Review:** Tích hợp API **Google Gemini 1.5 Pro/Flash** để tự động đọc nội dung file code, chấm điểm, phát hiện lỗi logic/bảo mật và đưa ra nhận xét chi tiết dưới dạng HTML.
+* **AI Code Review:** Tích hợp API **Google Gemini 2.5 Pro/Flash** để tự động đọc nội dung file code, chấm điểm, phát hiện lỗi logic/bảo mật và đưa ra nhận xét chi tiết dưới dạng HTML.
 * **Smart Upload (1-Touch):** Widget upload cải tiến, cho phép chọn file trực tiếp từ máy tính (bỏ qua các bước popup trung gian), hỗ trợ kéo thả nhiều file.
 * **Fast Upload Mode:** Hỗ trợ tải tài liệu lên ngay cả khi đang ở chế độ Xem (Read-only), không cần bấm nút "Sửa".
 * **Visual Tracking:** Thanh tiến độ (Progress Bar) động, tự động đổi màu cảnh báo theo deadline (Xanh: Ổn, Vàng: Sắp hạn, Đỏ: Trễ hạn).
@@ -89,8 +89,31 @@ API_KEY = "API Key của bạn"
 ```
 
 ## 📸 Hình ảnh Minh họa
-### 1. Giao diện Upload thông minh & AI Đánh giá
-### 2. Dashboard Phân tích Dự án
+### 1. Giao diện Quản lý Nhân sự
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/ho_so_nhan_su.png" width="500">
+</p>
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/ho_so_nhan_su2.png" width="500">
+</p>
+
+### 2. Giao diện Quản lý Dự án
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/du_an.png" width="500">
+</p>
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/thong_tin_du_an.png" width="500">
+</p>
+
+### 3. Giao diện Quản lý Công việc
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/cong_viec.png" width="500">
+</p>
+<p align="center">
+  <img src="HiepTran04/TTDN_16-03_N8/picture/thong_tin_cong_viec.png" width="500">
+</p>
+
+### 4. Dashboard Phân tích Dự án
 
 ## 📂 Cấu trúc Thư mục
 ```bash
