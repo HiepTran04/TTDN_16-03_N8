@@ -119,8 +119,6 @@ API_KEY = "API Key của bạn"
   <p>Thông tin công việc</p>
 </div>
 
-### 4. Dashboard Phân tích Dự án
-
 ## 📂 Cấu trúc Thư mục
 ```bash
 .
