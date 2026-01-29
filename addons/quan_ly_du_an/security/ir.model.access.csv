@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quan_ly_du_an,quan.ly.du.an,model_quan_ly_du_an,base.group_user,1,1,1,1
+access_quan_ly_cong_viec,quan.ly.cong.viec,model_quan_ly_cong_viec,base.group_user,1,1,1,1
+access_quan_ly_thanh_vien,quan.ly.thanh.vien,model_quan_ly_thanh_vien,base.group_user,1,1,1,1
+access_quan_ly_van_de,quan.ly.van.de,model_quan_ly_van_de,base.group_user,1,1,1,1
+access_quan_ly_tai_chinh,quan.ly.tai.chinh,model_quan_ly_tai_chinh,base.group_user,1,1,1,1

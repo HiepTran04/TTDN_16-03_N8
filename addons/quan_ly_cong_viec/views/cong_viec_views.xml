@@ -1,0 +1,270 @@
+<odoo>
+    <record id="view_cong_viec_form" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.form</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <form string="Chi tiết Công việc">
+                <header>
+                    <button name="action_ai_review_code" 
+                            string="🤖 AI Đánh giá" 
+                            type="object" 
+                            class="btn-warning" 
+                            icon="fa-magic"
+                            confirm="AI sẽ đọc toàn bộ các file đã nộp để chấm điểm. Bạn có chắc chắn không?"/>
+                            
+                    <field name="trang_thai" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="moi,dang_lam,cho_duyet,hoan_thanh"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="loai_cong_viec" class="oe_edit_only" string="Loại hình:"/>
+                        <div class="o_row">
+                            <field name="loai_cong_viec" widget="radio" options="{'horizontal': true}" class="oe_edit_only" style="font-weight: bold;"/>
+                            <field name="loai_cong_viec" widget="badge" class="oe_read_only" 
+                                   decoration-success="loai_cong_viec == 'dev'"
+                                   decoration-info="loai_cong_viec == 'ba'"
+                                   decoration-danger="loai_cong_viec == 'tester'"/>
+                        </div>
+                        <label for="ten_cong_viec" class="oe_edit_only"/>
+                        <h1>
+                            <field name="ten_cong_viec" placeholder="Ví dụ: Thiết kế Database..."/>
+                        </h1>
+                        <h3>
+                            <field name="ma_cong_viec" class="oe_inline" readonly="1" style="color: #007bff; margin-right: 10px; font-weight: bold;"/>
+                            <span class="text-muted">|</span>
+                            <field name="du_an_id" placeholder="Thuộc dự án..." options="{'no_create': True}" class="oe_inline pl-2"/>
+                        </h3>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6" style="padding-right: 20px; border-right: 1px solid #e9ecef;">
+                            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <h4 style="color: #017e84; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 5px; display: inline-block;">
+                                    <i class="fa fa-users mr-2"/>Phân công &amp; Đánh giá
+                                </h4>
+                                <group>
+                                    <field name="nguoi_giao_viec_id" widget="many2one_avatar" options="{'no_create': True}"/>
+                                    <field name="nhan_vien_tham_gia_ids" widget="many2many_tags_avatar" options="{'no_create': True}"/>
+                                    <field name="do_uu_tien" widget="priority"/>
+                                    <field name="do_kho" widget="radio" options="{'horizontal': true}" colspan="2"/>
+                                </group>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" style="padding-left: 20px;">
+                            <div style="background-color: #fff8e1; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <h4 style="color: #856404; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #ffc107; padding-bottom: 5px; display: inline-block;">
+                                    <i class="fa fa-clock-o mr-2"/>Thời gian &amp; Tiến độ
+                                </h4>
+                                <group>
+                                    <field name="ngay_bat_dau"/>
+                                    <label for="han_hoan_thanh"/>
+                                    <div class="o_row">
+                                        <field name="han_hoan_thanh" decoration-danger="trang_thai_deadline == 'tre_han'"/>
+                                        <field name="trang_thai_deadline" widget="badge" 
+                                               decoration-danger="trang_thai_deadline == 'tre_han'"
+                                               decoration-warning="trang_thai_deadline == 'sap_den_han'"
+                                               decoration-success="trang_thai_deadline == 'dung_han'"/>
+                                    </div>
+                                    <field name="ngay_hoan_thanh_thuc_te" attrs="{'invisible': [('trang_thai', '!=', 'hoan_thanh')]}"/>
+                                    <label for="tien_do" class="oe_edit_only"/>
+                                    <div class="o_row oe_edit_only">
+                                        <field name="tien_do" class="oe_inline" style="width: 50px !important; font-weight: bold;"/>
+                                        <span class="mr-2">%</span>
+                                    </div>
+                                    <field name="hien_thi_tien_do" widget="percentpie"/>
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+
+                    <separator string="Mô tả công việc" style="margin-top: 20px; font-size: 1.1rem; color: #6c757d;"/>
+                    <field name="mo_ta" placeholder="Mô tả chi tiết yêu cầu công việc, tài liệu đính kèm..." 
+                           style="background: #f9f9f9; padding: 10px; border-radius: 5px; min-height: 100px; border: 1px solid #dee2e6; margin-bottom: 20px;"/>
+
+                    <separator string="Nộp Sản phẩm &amp; AI Đánh giá" style="margin-top: 20px; font-size: 1.1rem; color: #17a2b8;"/>
+                    <div style="background-color: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #90caf9;">
+                        <div class="row">
+                            <div class="col-md-6" style="border-right: 1px solid #ccc;">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong><i class="fa fa-folder-open"/> Tài liệu &amp; Source Code:</strong>
+                                </div>
+                                
+                                <field name="file_ids" widget="many2many_binary" string="Đính kèm file" nolabel="1"/>
+                                
+                                <p class="text-muted mt-2 small font-italic">
+                                    <i class="fa fa-info-circle"/> Bấm nút "Upload your file" ở trên để chọn file từ máy tính (Hỗ trợ chọn nhiều file).
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <strong><i class="fa fa-magic"/> Kết quả đánh giá từ AI:</strong>
+                                    <button name="action_ai_review_code" 
+                                            string="Chấm điểm ngay" 
+                                            type="object" 
+                                            class="btn btn-sm btn-warning" 
+                                            icon="fa-bolt"/>
+                                </div>
+                                
+                                <field name="ai_danh_gia_code" widget="html" attrs="{'invisible': [('ai_danh_gia_code', '=', False)]}" style="margin-top: 10px; background: white; padding: 10px; border-radius: 5px;"/>
+                                
+                                <div attrs="{'invisible': [('ai_danh_gia_code', '!=', False)]}" class="text-muted font-italic mt-2">
+                                    Chưa có đánh giá nào. Hãy upload file và bấm nút "Chấm điểm ngay".
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px dashed #ccc; padding-top: 20px; margin-top: 20px;">
+                        <h4 style="color: #28a745; font-weight: 600; margin-bottom: 15px;">
+                            <i class="fa fa-line-chart mr-2"/>Nguồn lực &amp; Chi phí
+                        </h4>
+                        <group col="4">
+                            <field name="gio_du_kien"/>
+                            <field name="chi_phi_du_kien"/>
+                            <field name="gio_thuc_te"/>
+                            <field name="chi_phi"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_tree" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.tree</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <tree string="Công việc" decoration-danger="trang_thai_deadline == 'tre_han'" decoration-warning="trang_thai_deadline == 'sap_den_han'" decoration-muted="trang_thai == 'huy'" decoration-success="trang_thai == 'hoan_thanh'" sample="1">
+                <field name="ma_cong_viec" decoration-bf="1" width="100px"/>
+                <field name="ten_cong_viec" decoration-bf="1"/>
+                <field name="du_an_id" widget="badge" decoration-info="1"/>
+                <field name="nhan_vien_tham_gia_ids" widget="many2many_tags_avatar" optional="show"/>
+                <field name="han_hoan_thanh" widget="remaining_days" optional="show"/>
+                <field name="tien_do" widget="progressbar" optional="show"/>
+                <field name="do_uu_tien" widget="priority" optional="hide"/>
+                <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'hoan_thanh'" decoration-info="trang_thai == 'dang_lam'" decoration-warning="trang_thai == 'cho_duyet'" decoration-muted="trang_thai == 'moi'"/>
+                <field name="trang_thai_deadline" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_kanban" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.kanban</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="trang_thai" class="o_kanban_mobile" sample="1">
+                <field name="id"/>
+                <field name="ten_cong_viec"/>
+                <field name="ma_cong_viec"/>
+                <field name="nhan_vien_tham_gia_ids"/>
+                <field name="do_uu_tien"/>
+                <field name="tien_do"/>
+                <field name="han_hoan_thanh"/>
+                <field name="trang_thai"/>
+                <field name="trang_thai_deadline"/>
+                <field name="do_kho"/>
+                <field name="du_an_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click oe_kanban_card" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; margin-bottom: 15px; background: white; overflow: visible; min-width: 300px;">
+                            <div t-att-style="'height: 100%; width: 6px; position: absolute; left: 0; top: 0; border-radius: 8px 0 0 8px; ' + (record.trang_thai.raw_value == 'dang_lam' ? 'background-color: #17a2b8;' : (record.trang_thai.raw_value == 'hoan_thanh' ? 'background-color: #28a745;' : (record.trang_thai.raw_value == 'cho_duyet' ? 'background-color: #ffc107;' : 'background-color: #6c757d;')))"></div>
+                            <div class="oe_kanban_content" style="padding: 15px 15px 15px 20px;">
+                                <div class="o_kanban_record_top mb-2">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title" style="font-size: 1.15rem; color: #2c3e50; display: block; font-weight: 600;"><field name="ten_cong_viec"/></strong>
+                                        <div class="text-muted mt-2 d-flex align-items-center">
+                                            <span class="badge badge-light border mr-2" style="font-size: 0.85rem;"><field name="ma_cong_viec"/></span>
+                                            <span style="font-size: 0.9rem; color: #6c757d;"><i class="fa fa-folder-open-o mr-1"/> <field name="du_an_id"/></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_body mt-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div t-if="record.han_hoan_thanh.raw_value" class="font-weight-bold" style="font-size: 0.9rem;">
+                                            <span t-attf-class="#{record.trang_thai_deadline.raw_value == 'tre_han' ? 'text-danger' : (record.trang_thai_deadline.raw_value == 'sap_den_han' ? 'text-warning' : 'text-success')}"><i class="fa fa-clock-o mr-1"/> <field name="han_hoan_thanh" widget="remaining_days"/></span>
+                                        </div>
+                                        <field name="do_kho" widget="label_selection" options="{'classes': {'de': 'success', 'trung_binh': 'info', 'kho': 'warning', 'rat_kho': 'danger'}}"/>
+                                    </div>
+                                    <div class="mb-3 mt-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="text-muted small font-weight-bold text-uppercase" style="letter-spacing: 0.5px;">
+                                                <i class="fa fa-tasks mr-1"/>Tiến độ
+                                            </span>
+                                            <span t-attf-class="badge badge-pill badge-#{record.tien_do.raw_value == 100 ? 'success' : (record.tien_do.raw_value >= 50 ? 'primary' : 'warning')}" 
+                                                style="font-size: 0.85rem; padding: 4px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                                <field name="tien_do"/>%
+                                            </span>
+                                        </div>
+                                        <div class="progress" style="height: 6px; border-radius: 10px; background-color: #e9ecef; overflow: hidden;">
+                                            <div role="progressbar" 
+                                                t-attf-class="progress-bar bg-#{record.tien_do.raw_value == 100 ? 'success' : (record.tien_do.raw_value >= 50 ? 'primary' : 'warning')}" 
+                                                t-att-style="'width: ' + record.tien_do.raw_value + '%'" 
+                                                aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                                    <div class="oe_kanban_bottom_left"><field name="do_uu_tien" widget="priority"/></div>
+                                    <div class="oe_kanban_bottom_right d-flex align-items-center"><span class="mr-2 font-weight-bold text-dark" style="font-size: 0.9rem; white-space: nowrap;"><field name="nhan_vien_tham_gia_ids" widget="many2many_tags_avatar"/></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_search" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.search</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Công việc">
+                <field name="ten_cong_viec"/>
+                <field name="ma_cong_viec"/>
+                <field name="du_an_id"/>
+                <field name="nhan_vien_tham_gia_ids"/>
+                <filter string="Việc của tôi" name="my_tasks" domain="[('nhan_vien_tham_gia_ids.user_id', '=', uid)]"/>
+                <filter string="Đang thực hiện" name="doing" domain="[('trang_thai', '=', 'dang_lam')]"/>
+                <separator/>
+                <filter string="Trễ hạn" name="late" domain="[('trang_thai_deadline', '=', 'tre_han')]"/>
+                <filter string="Sắp đến hạn" name="warning" domain="[('trang_thai_deadline', '=', 'sap_den_han')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Dự án" name="group_project" context="{'group_by': 'du_an_id'}"/>
+                    <filter string="Người thực hiện" name="group_user" context="{'group_by': 'nhan_vien_tham_gia_ids'}"/>
+                    <filter string="Trạng thái" name="group_stage" context="{'group_by': 'trang_thai'}"/>
+                    <filter string="Độ ưu tiên" name="group_priority" context="{'group_by': 'do_uu_tien'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_calendar" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.calendar</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <calendar string="Lịch Công việc" date_start="ngay_bat_dau" date_stop="han_hoan_thanh" color="du_an_id" mode="month" quick_add="False">
+                <field name="ten_cong_viec"/>
+                <field name="nhan_vien_tham_gia_ids" avatar_field="image_128"/>
+                <field name="trang_thai"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_cong_viec_moi" model="ir.actions.act_window">
+        <field name="name">Danh sách Công việc</field>
+        <field name="res_model">quan.ly.cong.viec</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có công việc nào. Hãy tạo mới!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cong_viec_root" name="Quản lý Công việc" web_icon="quan_ly_cong_viec,static/description/icon.png" sequence="20"/>
+    <menuitem id="menu_cong_viec_list" parent="menu_cong_viec_root" name="Danh sách Công việc" action="action_cong_viec_moi" sequence="1"/>
+</odoo>

@@ -1,0 +1,75 @@
+<odoo>
+    <data noupdate="1">
+        <record id="chuc_vu_giam_doc" model="quan.ly.chuc.vu">
+            <field name="ma_chuc_vu">GD</field>
+            <field name="ten_chuc_vu">Giám đốc</field>
+            <field name="thu_tu_uu_tien">1</field>
+            <field name="mo_ta">Người đứng đầu, chịu trách nhiệm điều hành toàn bộ hoạt động.</field>
+        </record>
+
+        <record id="chuc_vu_truong_phong" model="quan.ly.chuc.vu">
+            <field name="ma_chuc_vu">TP</field>
+            <field name="ten_chuc_vu">Trưởng phòng</field>
+            <field name="thu_tu_uu_tien">2</field>
+            <field name="mo_ta">Quản lý hoạt động của một phòng ban cụ thể.</field>
+        </record>
+
+        <record id="chuc_vu_truong_nhom" model="quan.ly.chuc.vu">
+            <field name="ma_chuc_vu">TN</field>
+            <field name="ten_chuc_vu">Trưởng nhóm (Team Lead)</field>
+            <field name="thu_tu_uu_tien">3</field>
+            <field name="mo_ta">Quản lý chuyên môn cho một nhóm nhỏ.</field>
+        </record>
+
+        <record id="chuc_vu_nhan_vien" model="quan.ly.chuc.vu">
+            <field name="ma_chuc_vu">NV</field>
+            <field name="ten_chuc_vu">Nhân viên chính thức</field>
+            <field name="thu_tu_uu_tien">5</field>
+            <field name="mo_ta">Thực hiện các công việc chuyên môn.</field>
+        </record>
+
+        <record id="chuc_vu_thuc_tap" model="quan.ly.chuc.vu">
+            <field name="ma_chuc_vu">TTS</field>
+            <field name="ten_chuc_vu">Thực tập sinh</field>
+            <field name="thu_tu_uu_tien">10</field>
+            <field name="mo_ta">Học việc và hỗ trợ nhân viên chính thức.</field>
+        </record>
+
+
+        <record id="phong_ban_giam_doc" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">BGD</field>
+            <field name="ten_phong_ban">Ban Giám Đốc</field>
+            <field name="mo_ta">Bộ phận lãnh đạo cấp cao.</field>
+        </record>
+
+        <record id="phong_ban_hanh_chinh" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">HCNS</field>
+            <field name="ten_phong_ban">Phòng Hành chính Nhân sự</field>
+            <field name="mo_ta">Quản lý hồ sơ, tuyển dụng, lương thưởng và văn thư.</field>
+        </record>
+
+        <record id="phong_ban_ke_toan" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">KT</field>
+            <field name="ten_phong_ban">Phòng Kế toán - Tài chính</field>
+            <field name="mo_ta">Quản lý thu chi, báo cáo tài chính, thuế.</field>
+        </record>
+
+        <record id="phong_ban_kinh_doanh" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">KD</field>
+            <field name="ten_phong_ban">Phòng Kinh doanh</field>
+            <field name="mo_ta">Tìm kiếm khách hàng và bán sản phẩm/dịch vụ.</field>
+        </record>
+
+        <record id="phong_ban_ky_thuat" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">IT</field>
+            <field name="ten_phong_ban">Phòng Kỹ thuật &amp; Công nghệ</field>
+            <field name="mo_ta">Phát triển phần mềm, quản trị hệ thống, IT Helpdesk.</field>
+        </record>
+
+        <record id="phong_ban_marketing" model="quan.ly.phong.ban">
+            <field name="ma_phong_ban">MKT</field>
+            <field name="ten_phong_ban">Phòng Marketing</field>
+            <field name="mo_ta">Quảng bá thương hiệu và truyền thông.</field>
+        </record>
+    </data>
+</odoo>

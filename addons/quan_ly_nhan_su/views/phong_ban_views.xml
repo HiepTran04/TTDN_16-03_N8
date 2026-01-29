@@ -1,0 +1,209 @@
+<odoo>
+    <record id="view_phong_ban_kanban" model="ir.ui.view">
+        <field name="name">quan.ly.phong.ban.kanban.design</field>
+        <field name="model">quan.ly.phong.ban</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile o_kanban_dashboard" sample="1">
+                <field name="ma_phong_ban"/>
+                <field name="ten_phong_ban"/>
+                <field name="truong_phong_id"/>
+                <field name="so_luong_nhan_su"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <t t-set="color_class" t-value="'primary'"/>
+                        
+                        <t t-if="record.ma_phong_ban.raw_value == 'BGD'">
+                            <t t-set="color_class" t-value="'danger'"/>
+                        </t>
+                        
+                        <t t-elif="record.ma_phong_ban.raw_value == 'IT'">
+                            <t t-set="color_class" t-value="'primary'"/>
+                        </t>
+                        
+                        <t t-elif="record.ma_phong_ban.raw_value == 'KD'">
+                            <t t-set="color_class" t-value="'success'"/>
+                        </t>
+                        
+                        <t t-elif="record.ma_phong_ban.raw_value == 'KT'">
+                            <t t-set="color_class" t-value="'warning'"/>
+                        </t>
+                        
+                        <t t-elif="record.ma_phong_ban.raw_value == 'HCNS'">
+                            <t t-set="color_class" t-value="'info'"/>
+                        </t>
+                        
+                        <t t-elif="record.ma_phong_ban.raw_value == 'MKT'">
+                            <t t-set="color_class" t-value="'secondary'"/>
+                        </t>
+                        
+                        <div t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content o_kanban_card border-top-{{color_class}}"
+                             style="border-top-width: 4px !important; padding-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                            
+                            <div class="o_kanban_card_header d-flex justify-content-between align-items-center mb-2">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="h4 mt4 mb4 font-weight-bold text-dark">
+                                        <field name="ten_phong_ban"/>
+                                    </div>
+                                    <div class="small text-muted font-weight-bold d-flex align-items-center">
+                                        <span t-attf-class="badge badge-pill badge-{{color_class}}">
+                                            <i class="fa fa-hashtag mr-1"/><field name="ma_phong_ban"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_image float-right rounded-circle" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <field name="truong_phong_id" widget="many2one_avatar" options="{'size': [50, 50]}"/>
+                                </div>
+                            </div>
+
+                            <div class="o_kanban_card_content mt-3">
+                                <div class="d-flex align-items-center mb-3" t-if="record.truong_phong_id.raw_value">
+                                    <i class="fa fa-user-tie text-muted mr-2" title="Quản lý"/>
+                                    <t t-if="record.ma_phong_ban.raw_value == 'BGD'">
+                                        <span class="text-muted mr-1">Giám đốc:</span> 
+                                    </t>
+                                    <t t-else="">
+                                        <span class="text-muted mr-1">Trưởng phòng:</span>
+                                    </t>
+                                    <span t-attf-class="font-weight-bold text-{{color_class}}"><field name="truong_phong_id"/></span>
+                                </div>
+                                <div t-else="" class="text-muted font-italic mb-3">
+                                    <i class="fa fa-exclamation-circle mr-1"/>Chưa có quản lý
+                                </div>
+
+                                <div class="d-flex justify-content-end mt-3">
+                                    <div t-attf-class="badge badge-{{color_class}} p-2 pl-3 pr-3 d-flex align-items-center" 
+                                         style="font-size: 1.1em; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                        <i class="fa fa-users mr-2"/>
+                                        <span class="font-weight-bold"><field name="so_luong_nhan_su"/> Nhân sự</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_phong_ban_tree" model="ir.ui.view">
+        <field name="name">quan.ly.phong.ban.tree</field>
+        <field name="model">quan.ly.phong.ban</field>
+        <field name="arch" type="xml">
+            <tree string="Phòng ban" create="0" delete="0" edit="0" import="0" sample="1">
+                <field name="ma_phong_ban" width="100px" decoration-bf="1" 
+                       decoration-danger="ma_phong_ban == 'BGD'"
+                       decoration-primary="ma_phong_ban == 'IT'"
+                       decoration-success="ma_phong_ban in ['KD', 'MKT']"
+                       decoration-warning="ma_phong_ban == 'HCNS'"
+                       decoration-info="ma_phong_ban == 'KT'"/>
+                       
+                <field name="ten_phong_ban" width="300px" decoration-bf="1" class="text-primary"/>
+                <field name="truong_phong_id" widget="many2one_avatar"/>
+                
+                <field name="so_luong_nhan_su" sum="Tổng nhân sự" widget="badge" 
+                       decoration-danger="ma_phong_ban == 'BGD'"
+                       decoration-primary="ma_phong_ban == 'IT'"
+                       decoration-success="ma_phong_ban in ['KD', 'MKT']"
+                       decoration-warning="ma_phong_ban == 'HCNS'"
+                       decoration-info="ma_phong_ban == 'KT'"/>
+                       
+                <field name="mo_ta" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_phong_ban_form" model="ir.ui.view">
+        <field name="name">quan.ly.phong.ban.form</field>
+        <field name="model">quan.ly.phong.ban</field>
+        <field name="arch" type="xml">
+            <form string="Phòng ban" create="0" delete="0" edit="0">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-users" type="object" name="action_view_nhan_su">
+                            <field string="Nhân sự" name="so_luong_nhan_su" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="ten_phong_ban" class="oe_edit_only"/>
+                        <h1 class="d-flex align-items-center">
+                            <span class="fa fa-building-o text-muted mr-2"/>
+                            <field name="ten_phong_ban" readonly="1" class="text-primary oe_inline"/>
+                        </h1>
+                        <div class="d-flex align-items-center mt-1">
+                            <span class="text-muted mr-2" style="font-size: 16px; font-weight: normal;">Mã phòng:</span>
+                            <span class="badge badge-pill badge-info" style="font-size: 16px;">
+                                <field name="ma_phong_ban" readonly="1"/>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="truong_phong_id" widget="many2one_avatar" readonly="1" options="{'no_open': True}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Danh sách Nhân viên">
+                            <field name="nhan_su_ids" readonly="1">
+                                <tree decoration-muted="trang_thai == 'nghi_viec'">
+                                    <field name="code_chuc_vu" invisible="1"/>
+                                    
+                                    <field name="ma_nhan_su" decoration-bf="1"/>
+                                    <field name="ho_ten" decoration-bf="1"/>
+                                    
+                                    <field name="chuc_vu_id" widget="badge" 
+                                           decoration-danger="code_chuc_vu == 'GD'"
+                                           decoration-warning="code_chuc_vu == 'TP'"
+                                           decoration-primary="code_chuc_vu == 'TN'"
+                                           decoration-info="code_chuc_vu == 'NV'"
+                                           decoration-muted="code_chuc_vu == 'TTS'"/>
+                                           
+                                    <field name="so_dien_thoai"/>
+                                    <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'dang_lam'" decoration-danger="trang_thai == 'nghi_viec'"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <separator string="Chức năng &amp; Nhiệm vụ" class="mt-4 text-primary"/>
+                    <div class="alert alert-info" role="alert" style="margin-bottom: 10px;">
+                        <i class="fa fa-info-circle mr-1"/>
+                        <i>Thông tin chi tiết về chức năng và nhiệm vụ của phòng ban.</i>
+                    </div>
+                    <field name="mo_ta" readonly="1" placeholder="Mô tả chức năng nhiệm vụ..." class="oe_inline" 
+                           style="width: 100%; min-height: 100px; padding: 10px; background-color: #f9f9f9; border: 1px solid #dee2e6; border-radius: 4px;"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_phong_ban_search" model="ir.ui.view">
+        <field name="name">quan.ly.phong.ban.search</field>
+        <field name="model">quan.ly.phong.ban</field>
+        <field name="arch" type="xml">
+            <search string="Tìm phòng ban">
+                <field name="ten_phong_ban"/>
+                <field name="ma_phong_ban"/>
+                <field name="truong_phong_id"/>
+                <filter string="Có nhân sự" name="co_nhan_su" domain="[('so_luong_nhan_su', '>', 0)]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Trưởng phòng" name="group_truong_phong" context="{'group_by': 'truong_phong_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_phong_ban" model="ir.actions.act_window">
+        <field name="name">Phòng ban</field>
+        <field name="res_model">quan.ly.phong.ban</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Hệ thống chưa có phòng ban nào.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_phong_ban" name="Phòng ban" parent="menu_root_quan_ly" action="action_phong_ban" sequence="20"/>
+</odoo>

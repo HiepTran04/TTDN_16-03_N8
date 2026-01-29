@@ -1,0 +1,89 @@
+<odoo>
+    <record id="view_cong_viec_analysis_search" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.analysis.search</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <search string="Phân tích Công việc">
+                <field name="du_an_id"/>
+                <field name="nguoi_giao_viec_id"/>
+                
+                <separator/>
+                <filter string="🔥 Việc Khẩn cấp" name="high_priority" domain="[('do_uu_tien', 'in', ['2', '3'])]"/>
+                <filter string="⚠️ Việc Trễ hạn" name="overdue" domain="[('trang_thai_deadline', '=', 'tre_han')]"/>
+                <separator/>
+                <filter string="Đang thực hiện" name="doing" domain="[('trang_thai', '=', 'dang_lam')]"/>
+                <filter string="Đã hoàn thành" name="done" domain="[('trang_thai', '=', 'hoan_thanh')]"/>
+                
+                <group expand="1" string="Phân tích theo...">
+                    <filter string="Dự án" name="group_project" context="{'group_by': 'du_an_id'}"/>
+                    <filter string="Người thực hiện" name="group_assignee" context="{'group_by': 'nhan_vien_tham_gia_ids'}"/>
+                    <filter string="Hạn chót (Tháng)" name="group_deadline" context="{'group_by': 'han_hoan_thanh:month'}"/>
+                    <filter string="Trạng thái" name="group_stage" context="{'group_by': 'trang_thai'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_du_an_task_analysis_graph" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.graph.workload</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <graph string="Phân bổ Công việc theo Dự án" type="bar" sample="1" stacked="1" order="DESC">
+                <field name="du_an_id"/>
+                
+                <field name="trang_thai"/>
+                
+                </graph>
+        </field>
+    </record>
+
+    <record id="view_du_an_task_trend_graph" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.graph.trend</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <graph string="Xu hướng Hoàn thành (Timeline)" type="line" sample="1">
+                <field name="han_hoan_thanh" interval="month"/>
+                
+                <field name="trang_thai"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_du_an_task_analysis_pivot" model="ir.ui.view">
+        <field name="name">quan.ly.cong.viec.pivot</field>
+        <field name="model">quan.ly.cong.viec</field>
+        <field name="arch" type="xml">
+            <pivot string="Báo cáo Hiệu suất (KPI)" sample="1" disable_linking="True" display_quantity="true">
+                <field name="du_an_id" type="row"/>
+                <field name="nguoi_giao_viec_id" type="row"/>
+                
+                <field name="trang_thai" type="col"/>
+                
+                <field name="gio_du_kien" type="measure" string="Giờ Est"/>
+                <field name="gio_thuc_te" type="measure" string="Giờ Act"/>
+                <field name="tien_do" type="measure" string="% Trung bình"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_bao_cao_du_an" model="ir.actions.act_window">
+        <field name="name">Trung tâm Báo cáo (Analytics)</field>
+        <field name="res_model">quan.ly.cong.viec</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="view_id" ref="view_du_an_task_analysis_graph"/>
+        <field name="search_view_id" ref="view_cong_viec_analysis_search"/>
+        <field name="context">{'group_by': ['du_an_id', 'trang_thai'], 'search_default_group_project': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu phân tích. Hãy tạo công việc mới!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_bao_cao_du_an"
+              name="📊 Analytics &amp; Reports"
+              parent="menu_du_an_root"
+              action="action_bao_cao_du_an"
+              sequence="99"/>
+
+</odoo>

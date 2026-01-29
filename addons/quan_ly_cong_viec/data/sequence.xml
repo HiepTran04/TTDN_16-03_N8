@@ -1,0 +1,9 @@
+<odoo>
+    <record id="seq_quan_ly_cong_viec" model="ir.sequence">
+        <field name="name">Mã công việc</field>
+        <field name="code">quan.ly.cong.viec</field>
+        <field name="prefix">CV-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

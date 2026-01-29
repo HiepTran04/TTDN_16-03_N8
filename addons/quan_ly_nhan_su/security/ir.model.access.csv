@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quan_ly_nhan_su,quan_ly_nhan_su,model_quan_ly_nhan_su,base.group_user,1,1,1,1
+access_quan_ly_phong_ban,quan_ly_phong_ban,model_quan_ly_phong_ban,base.group_user,1,1,1,1
+access_quan_ly_chuc_vu,quan_ly_chuc_vu,model_quan_ly_chuc_vu,base.group_user,1,1,1,1
