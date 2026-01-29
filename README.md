@@ -91,26 +91,26 @@ API_KEY = "API Key của bạn"
 ## 📸 Hình ảnh Minh họa
 ### 1. Giao diện Quản lý Nhân sự
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/ho_so_nhan_su.png" width="500">
+  <img src="picture/ho_so_nhan_su.png" width="500">
 </p>
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/ho_so_nhan_su2.png" width="500">
+  <img src="picture/ho_so_nhan_su2.png" width="500">
 </p>
 
 ### 2. Giao diện Quản lý Dự án
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/du_an.png" width="500">
+  <img src="picture/du_an.png" width="500">
 </p>
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/thong_tin_du_an.png" width="500">
+  <img src="picture/thong_tin_du_an.png" width="500">
 </p>
 
 ### 3. Giao diện Quản lý Công việc
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/cong_viec.png" width="500">
+  <img src="picture/cong_viec.png" width="500">
 </p>
 <p align="center">
-  <img src="HiepTran04/TTDN_16-03_N8/picture/thong_tin_cong_viec.png" width="500">
+  <img src="picture/thong_tin_cong_viec.png" width="500">
 </p>
 
 ### 4. Dashboard Phân tích Dự án
